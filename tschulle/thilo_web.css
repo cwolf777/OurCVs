@@ -1,0 +1,22 @@
+.first{
+	text-align: center;
+}
+.first table{
+	background-color: blanchedalmond;
+	border-radius: 2%;
+	margin: auto;
+	text-align: center;
+	border: 2px solid black;
+}
+td{
+	text-align: center;
+}
+body{
+	text-align: center;
+}
+.first .table-wrapper {
+	text-align: center;
+  }
+.icon{
+	height: 2em;
+}
