@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fancy ToDo List</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #74ebd5, #acb6e5);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 50px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .todo-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+      font-weight: 700;
+    }
+
+    #new {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .todo {
+      background-color: #ffeeba;
+      padding: 12px 20px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    .todo:hover {
+      background-color: #ffd966;
+      transform: scale(1.02);
+    }
+
+    .todo i {
+      color: #dc3545;
+      cursor: pointer;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <div class="todo-container">
+    <h1>My ToDo List</h1>
+    <button id="new" class="btn btn-primary btn-lg">
+      <i class="bi bi-plus-circle"></i> New Task
+    </button>
+    <div id="ft_list"></div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      const $ft_list = $("#ft_list");
+
+      function saveTodos() {
+        const todos = [];
+        $(".todo span").each(function () {
+          todos.push($(this).text());
+        });
+        localStorage.setItem("todos", JSON.stringify(todos));
+      }
+
+      function loadTodos() {
+        const data = localStorage.getItem("todos");
+        if (data) {
+          const todos = JSON.parse(data);
+          todos.forEach(todoText => {
+            createTodo(todoText);
+          });
+        }
+      }
+
+      function createTodo(todoText) {
+        const $todo = $("<div>").addClass("todo");
+        const $text = $("<span>").text(todoText);
+        const $delete = $('<i class="bi bi-trash"></i>');
+
+        $delete.on("click", function () {
+          if (confirm("Are you sure you want to delete this TO DO?")) {
+            $todo.remove();
+            saveTodos();
+          }
+        });
+
+        $todo.append($text, $delete);
+        $ft_list.prepend($todo);
+      }
+
+      $("#new").on("click", function () {
+        const todoText = prompt("Enter a new TO DO:");
+        if (todoText && todoText.trim() !== "") {
+          createTodo(todoText.trim());
+          saveTodos();
+        }
+      });
+
+      loadTodos();
+    });
+  </script>
+</body>
+</html>

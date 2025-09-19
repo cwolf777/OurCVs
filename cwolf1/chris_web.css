@@ -1,0 +1,50 @@
+/* About Me Section */
+#about {
+	padding: 100px 20px;
+	background-color: #f8f9fa; /* sanftes helles Grau */
+  }
+  
+  .section-title {
+	font-family: 'Georgia', serif;
+	font-size: 3rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	color: #343a40;
+	text-align: center;  /* <--- hier */
+	margin-bottom: 50px;
+	position: relative;
+  }
+  
+  .about-img {
+	width: 750px; /* Bildgröße */
+	height: 750px;
+	object-fit: cover;
+	border-radius: 50%; /* rundes Bild */
+	border: 5px solid #343a40; /* optionaler Rahmen in Navbar-Farbe */
+  }
+  
+  /* Monumentaler Name */
+  .about-name {
+	font-size: 4rem;             /* deutlich größer */
+	font-weight: 900;            /* sehr fett */
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-transform: uppercase;   /* alles großbuchstaben */
+	letter-spacing: 3px;         /* Buchstabenabstand */
+	color: #343a40;
+	text-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* leichter Schatten */
+  }
+  
+  /* Info-Box */
+  .about-info {
+	font-size: 1.25rem;
+	color: #343a40;
+	display: inline-block;        /* damit Box nur um den Text */
+	background-color: #e9ecef;    /* helles Grau */
+	padding: 15px 25px;
+	border-radius: 15px;
+	box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+	margin-top: 10px;
+  }
+  

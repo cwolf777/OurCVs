@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fancy Calculator</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #667eea, #764ba2);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .calculator {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .calculator h1 {
+      margin-bottom: 30px;
+      color: #333;
+      font-weight: 700;
+    }
+
+    .form-control, .form-select {
+      border-radius: 12px;
+      margin-bottom: 20px;
+      font-size: 18px;
+      padding: 10px 15px;
+    }
+
+    #calculate {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 12px;
+      background: linear-gradient(to right, #ff512f, #dd2476);
+      color: #fff;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    #calculate:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h1><i class="bi bi-calculator"></i> Fancy Calculator</h1>
+    <input type="number" id="input1" class="form-control" placeholder="Insert first number">
+    <select id="operations" class="form-select">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+      <option value="%">%</option>
+    </select>
+    <input type="number" id="input2" class="form-control" placeholder="Insert second number">
+    <button id="calculate">Calculate</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const input1 = document.getElementById("input1");
+    const input2 = document.getElementById("input2");
+    const operations = document.getElementById("operations");
+    const button = document.getElementById("calculate");
+    const resultDiv = document.getElementById("result");
+
+    button.addEventListener("click", function() {
+      const num1 = parseFloat(input1.value);
+      const num2 = parseFloat(input2.value);
+      const op = operations.value;
+
+      if (isNaN(num1) || isNaN(num2)) {
+        resultDiv.textContent = "⚠️ Please enter valid numbers!";
+        return;
+      }
+      if (num1 < 0 || num2 < 0) {
+        resultDiv.textContent = "⚠️ Inputs cannot be negative!";
+        return;
+      }
+
+      let res;
+      switch(op) {
+        case "+": res = num1 + num2; break;
+        case "-": res = num1 - num2; break;
+        case "*": res = num1 * num2; break;
+        case "/":
+          if(num2 === 0) { resultDiv.textContent = "🚫 Division by zero!"; return; }
+          res = num1 / num2;
+          break;
+        case "%":
+          if(num2 === 0) { resultDiv.textContent = "🚫 Division by zero!"; return; }
+          res = num1 % num2;
+          break;
+      }
+
+      resultDiv.textContent = "✅ Result: " + res;
+    });
+
+    // Optional: gentle reminder every 30s
+    setInterval(() => {
+      console.log("Don't forget to use the calculator! 😉");
+    }, 30000);
+  </script>
+</body>
+</html>
